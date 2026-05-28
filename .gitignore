@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Playwright test outputs
+test-results/
+playwright-report/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Dependency directories
+.pnpm-debug.log*
+
+# Optional npm cache
+.npm/
+
+# dotenv environment variables
+.env
+.env.*
+
+# Misc
+coverage/
+reports/
