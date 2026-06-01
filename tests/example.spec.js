@@ -1,16 +1,48 @@
 const { test, expect } = require('@playwright/test');
+test.use({ browserName: 'chromium' });
+// const { chromium } = require('playwright');
+// const browser = await chromium.launch({ headless: false });
 
-test('homepage has Playwright in title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-  await expect(page).toHaveTitle(/Playwright/);
+// test.only('homepage has Playwright in title', async ({ page }, testInfo) => {
+//   console.log('Browser / project:', testInfo.project.name);
+//   await page.goto('https://playwright.dev/');
+//   await expect(page).toHaveTitle(/Playwright/);
+// });
+
+test.only('Browser context playwright test', async ({ browser }) => {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await page.goto("https://sso.teachable.com/secure/9521/identity/sign_up/otp?wizard_id=BEi7-P6ZvMXI1VOuPwFbEbrUvqeWbny-i7noy1y2ulZkZx3YM0UJs9RdXXRANTmTPoRj01DiK90cHelIe6hbpw");
+  console.log(await page.title());
+  await page.locator('#name').fill('test');
+  await page.waitForTimeout(1000);
+  await page.locator('#email').fill('testsayantanipal@gmail.com');
+  await page.waitForTimeout(1000);
+  await page.locator('#allowMarketingEmails').check();
+  await page.waitForTimeout(1000);
+  // await page.locator('#allowMarketingEmails').uncheck();
+  // await page.waitForTimeout(1000);
+  await page.locator('#otp-login-btn').click();
+  await page.waitForTimeout(10000);
 });
 
-test('click on API', async ({ page }) => {
+
+test('homepage has Playwright in title', async ({ browser, page }) => {
+  console.log( await browser.version());
+  await page.goto('https://playwright.dev/');
+  await expect(page).toHaveTitle(/Playwright/);
+  console.log(await page.title());
+  await expect(page).toHaveTitle('Fast and reliable end-to-end testing for modern web apps | Playwright');
+
+  
+});
+
+test('click on API', async ({ browser, page }) => {
   await page.goto('https://playwright.dev/docs/api/class-playwright');
   await expect(page).toHaveTitle(/Playwright/);
 });
 
-test('click on API and check for text', async ({ page }) => {
+test('click on API and check for text', async ({ browser, page }) => {
   await page.goto('https://playwright.dev/docs/api/class-playwright');
   await expect(page.locator('h1')).toHaveText('Playwright Library');
 });
