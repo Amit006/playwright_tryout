@@ -1,5 +1,8 @@
 const { test, expect } = require('@playwright/test');
+const { getLatestOtp } = require('./gmail');
+
 test.use({ browserName: 'chromium' });
+
 // const { chromium } = require('playwright');
 // const browser = await chromium.launch({ headless: false });
 
@@ -16,14 +19,22 @@ test.only('Browser context playwright test', async ({ browser }) => {
   console.log(await page.title());
   await page.locator('#name').fill('test');
   await page.waitForTimeout(1000);
-  await page.locator('#email').fill('testsayantanipal@gmail.com');
+  await page.locator('#email').fill('sayantanipaltest@gmail.com');
   await page.waitForTimeout(1000);
   await page.locator('#allowMarketingEmails').check();
-  await page.waitForTimeout(1000);
-  // await page.locator('#allowMarketingEmails').uncheck();
-  // await page.waitForTimeout(1000);
+  await page.waitForTimeout(500);
   await page.locator('#otp-login-btn').click();
-  await page.waitForTimeout(10000);
+
+  // await page.waitForSelector('#otp', { state: 'visible', timeout: 20000 });
+  // const otp = await getLatestOtp(
+  //   'from:no-reply@rahulshettyacademy.com subject:OTP',
+  //   /\\b(\\d{4,6})\\b/
+  // );
+  // await expect(otp).not.toBeNull();
+  // await page.locator('#otp').fill(otp);
+  // await expect(page.locator('#otp')).toHaveValue(otp);
+
+  await page.waitForTimeout(1000);
 });
 
 
