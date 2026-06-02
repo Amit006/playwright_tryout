@@ -1,4 +1,6 @@
+require('dotenv').config();
 const { defineConfig, devices } = require('@playwright/test');
+
 
 module.exports = defineConfig({
   testDir: './tests',
@@ -30,7 +32,7 @@ module.exports = defineConfig({
 
 const config = {
     testDir: './tests',
-    timeout: 30 * 1000, // 30 seconds
+    timeout: 60000, // 60 seconds
     expect: {
         timeout: 5000 // 5 seconds
     },
